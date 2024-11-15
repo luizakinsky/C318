@@ -11,16 +11,16 @@
 
 ### 3. Exploração e Limpeza dos Dados
 * Análise Exploratória: 
-- Verificações Iniciais: Verificar informações gerais e valores ausentes;
-- Estudo dos Dados: Entender o equilíbrio das classes, analisar a extensão das avaliações e visualizar algumas avaliações para entender padrões.
+  - Verificações Iniciais: Verificar informações gerais e valores ausentes;
+  - Estudo dos Dados: Entender o equilíbrio das classes, analisar a extensão das avaliações e visualizar algumas avaliações para entender padrões.
 * Limpeza dos Dados:
-- Verificar e remover duplicatas;
-- Remover caracteres especiais, links e números irrelevantes;
-- Converter o texto para minúsculas para padronização;
-- Remover pontuação;
-- Tokenizar o texto;
-- Remover palavras comuns (stop words) que não carregam significado relevante para o sentimento, como “o”, “e”, “um”;
-- Reconstruir o texto limpo.
+  - Verificar e remover duplicatas;
+  - Remover caracteres especiais, links e números irrelevantes;
+  - Converter o texto para minúsculas para padronização;
+  - Remover pontuação;
+  - Tokenizar o texto;
+  - Remover palavras comuns (stop words) que não carregam significado relevante para o sentimento, como “o”, “e”, “um”;
+  - Reconstruir o texto limpo.
 
 ### 4. Pré-processamento de Texto
 *	Tokenização e Vetorização com TF-IDF: Transformar os textos em uma matriz numérica baseada na importância das palavras (TF-IDF);
