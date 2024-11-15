@@ -6,15 +6,21 @@
 *	Aplicação Prática: Entender melhor as opiniões dos clientes, melhorar produtos ou serviços com base no feedback.
 
 ### 2. Coleta de Dados
-*	Dataset: Utilizar um dataset público, como o [IMDB Reviews Dataset](https://ai.stanford.edu/~amaas/data/sentiment/).
-*	Formato dos Dados: 
+*	Dataset: Utilizar um dataset público, como o [IMDB Reviews Dataset](https://www.kaggle.com/datasets/lakshmi25npathi/imdb-dataset-of-50k-movie-reviews?resource=download).
+*	Formato dos Dados: reviews | sentiments
 
 ### 3. Exploração e Limpeza dos Dados
-* Análise Exploratória: Observe a distribuição dos sentimentos no dataset e veja se há um equilíbrio entre classes positivas, negativas e neutras.
-*	Limpeza dos Dados:
--	Remover caracteres especiais, links e números irrelevantes.
--	Converter o texto para minúsculas para padronização.
--	Remover palavras comuns (stop words) que não carregam significado relevante para o sentimento, como “o”, “e”, “um”.
+* Análise Exploratória: 
+- Verificações Iniciais: Verificar informações gerais e valores ausentes;
+- Estudo dos Dados: Entender o equilíbrio das classes, analisar a extensão das avaliações e visualizar algumas avaliações para entender padrões.
+* Limpeza dos Dados:
+- Verificar e remover duplicatas;
+- Remover caracteres especiais, links e números irrelevantes;
+- Converter o texto para minúsculas para padronização;
+- Remover pontuação;
+- Tokenizar o texto;
+- Remover palavras comuns (stop words) que não carregam significado relevante para o sentimento, como “o”, “e”, “um”;
+- Reconstruir o texto limpo.
 
 ### 4. Pré-processamento de Texto
 *	Tokenização: Dividir cada texto em palavras (tokens).
@@ -33,3 +39,4 @@
 ### 7. Implementação do Modelo
 *	Testes com o Conjunto de Teste: Testar o modelo no conjunto de teste e observar os resultados.
 *	Salvamento do Modelo: Utilizar bibliotecas como joblib ou pickle para salvar o modelo treinado e poder reutilizá-lo.
+
