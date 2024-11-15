@@ -55,9 +55,10 @@ db = pd.read_csv('/Users/luizakinsky/Documents/Material de aula INATEL/2024.2/C3
 # print("Avaliações Negativas:")
 # print(db[db['sentiment'] == 'negative']['review'].head(3))
 
+
 # --------------------- LIMPEZA DOS DADOS ---------------------
 # Verificar duplicatas
-print("Número de duplicatas:", db.duplicated().sum())
+#print("Número de duplicatas:", db.duplicated().sum())
 # Remover duplicatas (se necessário)
 db = db.drop_duplicates()
 
@@ -87,4 +88,25 @@ def clean_text_alternative(text):
 # Aplicar a função de limpeza
 db['cleaned_review'] = db['review'].apply(clean_text_alternative)
 # Verificar os resultados
-print(db[['review', 'cleaned_review']].head())
+#print(db[['review', 'cleaned_review']].head())
+
+
+# --------------------- PRÉ-PROCESSAMENTO ---------------------
+# Tokenização e Vetorização com TF-IDF
+# Transformar os textos em uma matriz numérica baseada na importância das palavras (TF-IDF)
+# Inicializar o vetor TF-IDF
+tfidf_vectorizer = TfidfVectorizer(max_features=5000, stop_words='english')
+# Ajustar o vetor TF-IDF e transformar os textos limpos
+X = tfidf_vectorizer.fit_transform(db['cleaned_review'])
+# Mostrar as primeiras 5 palavras mais frequentes
+#print("Palavras mais frequentes:", tfidf_vectorizer.get_feature_names_out()[:5])
+
+# Divisão do Dataset em conjuntos de treinamento e teste
+# Variável independente (X) é a matriz TF-IDF
+# Variável dependente (y) é a coluna 'sentiment' (convertida para números)
+y = db['sentiment'].apply(lambda x: 1 if x == 'positive' else 0)
+# Divisão dos dados (80% treinamento, 20% teste)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+# Mostrar os tamanhos dos conjuntos
+#print("Tamanho do conjunto de treinamento:", X_train.shape)
+#print("Tamanho do conjunto de teste:", X_test.shape)
