@@ -113,3 +113,62 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 # Mostrar os tamanhos dos conjuntos
 #print("Tamanho do conjunto de treinamento:", X_train.shape)
 #print("Tamanho do conjunto de teste:", X_test.shape)
+
+# --------------------- TREINAMENTO DO MODELO ---------------------
+# Inicializar o modelo Random Forest
+rf_model = RandomForestClassifier(n_estimators=100, random_state=42)
+# Treinar o modelo com os dados de treinamento
+rf_model.fit(X_train, y_train)
+
+# Fazer previsões no conjunto de teste
+y_pred = rf_model.predict(X_test)
+
+# AJUSTE DE HIPERPARÂMETROS
+# Definir o grid de hiperparâmetros
+param_grid = {
+    'n_estimators': [100, 200],
+    'max_depth': [None, 10, 20],
+    'min_samples_split': [2, 5],
+    'min_samples_leaf': [1, 2]
+}
+
+# Configurar a busca com validação cruzada
+grid_search = GridSearchCV(
+    estimator=RandomForestClassifier(random_state=42),
+    param_grid=param_grid,
+    cv=5,  # 5 folds na validação cruzada
+    scoring='accuracy',
+    n_jobs=-1,  # Paralelizar para acelerar
+    verbose=2
+)
+# Realizar a busca
+grid_search.fit(X_train, y_train)
+# Exibir os melhores parâmetros encontrados
+#print("Melhores Hiperparâmetros:", grid_search.best_params_)
+# Melhor modelo ajustado
+best_rf_model = grid_search.best_estimator_
+
+# VALIDAÇÃO
+# Realizar validação cruzada com 5 folds
+cv_scores = cross_val_score(rf_model, X_train, y_train, cv=5, scoring='accuracy')
+# Resultados da validação cruzada
+#print("Acurácias em cada fold:", cv_scores)
+#print("Acurácia média:", cv_scores.mean())
+
+
+# --------------------- AVALIAÇÃO DO MODELO ---------------------
+# Relatório de classificação
+print("Relatório de Classificação:")
+print(classification_report(y_test, y_pred))
+
+# MATRIZ DE CONFUSÃO
+# Gerar matriz de confusão
+conf_matrix = confusion_matrix(y_test, y_pred)
+
+# Visualizar a matriz de confusão
+plt.figure(figsize=(8, 6))
+sns.heatmap(conf_matrix, annot=True, fmt="d", cmap="Blues", xticklabels=['Negative', 'Positive'], yticklabels=['Negative', 'Positive'])
+plt.title('Matriz de Confusão')
+plt.xlabel('Previsão')
+plt.ylabel('Real')
+plt.show()
