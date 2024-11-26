@@ -9,6 +9,15 @@ from sklearn.feature_extraction.text import ENGLISH_STOP_WORDS
 # Pré-processamento de texto
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
+# Random Forest
+from sklearn.ensemble import RandomForestClassifier
+import seaborn as sns
+# Validação cruzada
+from sklearn.model_selection import cross_val_score
+# Ajustar hiperparametros
+from sklearn.model_selection import GridSearchCV
+# Avaliação de métricas
+from sklearn.metrics import classification_report, confusion_matrix
 
 # Carregando o dataset
 db = pd.read_csv('/Users/luizakinsky/Documents/Material de aula INATEL/2024.2/C318/C318/IMDB Dataset.csv', delimiter=',')
