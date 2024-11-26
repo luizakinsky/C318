@@ -18,6 +18,8 @@ from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import GridSearchCV
 # Avaliação de métricas
 from sklearn.metrics import classification_report, confusion_matrix
+# Salvar o modelo
+import joblib
 
 # Carregando o dataset
 db = pd.read_csv('/Users/luizakinsky/Documents/Material de aula INATEL/2024.2/C318/C318/IMDB Dataset.csv', delimiter=',')
@@ -181,3 +183,25 @@ plt.title('Matriz de Confusão')
 plt.xlabel('Previsão')
 plt.ylabel('Real')
 plt.show()
+
+
+# --------------------- IMPLEMENTAÇÃO DO MODELO ---------------------
+# Fazer previsões no conjunto de teste
+y_test_pred = best_rf_model.predict(X_test)
+
+# Relatório de Classificação
+print("Relatório de Classificação no Conjunto de Teste:")
+print(classification_report(y_test, y_test_pred))
+
+# Salvar o modelo ajustado
+joblib.dump(best_rf_model, 'best_rf_model.pkl')
+print("Modelo salvo como 'best_rf_model.pkl'.")
+
+# Carregar o modelo salvo para uso futuro
+loaded_model = joblib.load('best_rf_model.pkl')
+print("Modelo carregado com sucesso.")
+
+# Testar o modelo carregado
+y_test_pred_loaded = loaded_model.predict(X_test)
+print("Relatório de Classificação (Modelo Carregado):")
+print(classification_report(y_test, y_test_pred_loaded))

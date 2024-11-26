@@ -59,4 +59,4 @@
 
 ### 7. Implementação do Modelo
 *	Testes com o Conjunto de Teste: Testar o modelo no conjunto de teste e observar os resultados.
-*	Salvamento do Modelo: Utilizar bibliotecas como joblib ou pickle para salvar o modelo treinado e poder reutilizá-lo.
+*	Salvamento do Modelo: Utilizar a biblioteca joblib para salvar o modelo treinado e poder reutilizá-lo.
